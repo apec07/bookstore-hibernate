@@ -3,15 +3,18 @@ package idv.cm.db;
 import javax.persistence.*;
 
 @Entity/*指定當前類是持久化實體類（不能省略）*/
-@Table(name = "USER")
+@Table(name = "B_USER")
 public class UserVO implements java.io.Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Column(name = "NAME",unique=true)
-	private String name;
+	@Id
+	@GeneratedValue   
+	private int id;
+	@Column(name = "user",unique=true)
+	private String user;
 	@Column(name = "PASSWORD")
 	private String password;
 	@Column(name = "EMAIL")
@@ -20,13 +23,23 @@ public class UserVO implements java.io.Serializable{
 	
 	public UserVO() {}
 
-	public String getName() {
-		return name;
+	public int getId() {
+		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	
 
 	public String getPassword() {
 		return password;
@@ -53,15 +66,16 @@ public class UserVO implements java.io.Serializable{
 		}
 		if(obj instanceof UserVO) {
 			UserVO user = (UserVO) obj;
-			return name.equals(user.getName())&& password.equals(user.getPassword());
+			return user.equals(user.getUser())&& password.equals(user.getPassword());
 		}
 		return false;
 	}
 
 	@Override
 	public String toString() {
-		return "UserVO [name=" + name + ", password=" + password + ", email=" + email + "]";
+		return "UserVO [name=" + user + ", password=" + password + ", email=" + email + "]";
 	}
+
 
 	
 }
